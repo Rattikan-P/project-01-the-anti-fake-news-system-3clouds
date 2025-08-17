@@ -105,11 +105,11 @@ const handleScroll = () => {
   scrollProgress.value = (scrollTop / docHeight) * 100
 
   // Show percentage when scrolling
-  showPercentage.value = true
-  clearTimeout(percentageTimer)
-  percentageTimer = setTimeout(() => {
-    showPercentage.value = false
-  }, 1500)
+  showPercentage.value = true;
+clearTimeout(percentageTimer);
+percentageTimer = window.setTimeout(() => {
+  showPercentage.value = false;
+}, 1500);
 }
 
 const scrollToTop = () => {
