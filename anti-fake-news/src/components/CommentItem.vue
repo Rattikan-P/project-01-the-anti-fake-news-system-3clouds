@@ -6,7 +6,9 @@
           class="w-8 h-8 rounded-full flex items-center justify-center mr-3 border border-gray-300 shadow-sm"
           :style="{ 'background-color': getProfileColor(comment.user) }"
         >
-          <span class="text-sm font-bold text-gray-800">{{ comment.user.charAt(0).toUpperCase() }}</span>
+          <span class="text-sm font-bold text-gray-800">{{
+            comment.user.charAt(0).toUpperCase()
+          }}</span>
         </div>
         <p class="font-bold text-gray-800">{{ comment.user }}</p>
       </div>
@@ -24,7 +26,7 @@
         <span
           :class="{
             'text-green-600': comment.vote === 'real',
-            'text-red-600': comment.vote === 'fake'
+            'text-red-600': comment.vote === 'fake',
           }"
           class="font-semibold ml-1"
         >
@@ -44,30 +46,30 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
-import type { Comment } from '../stores/news';
+import { defineProps, defineEmits } from 'vue'
+import type { Comment } from '../stores/news'
 
 const props = defineProps<{
-  comment: Comment;
-}>();
+  comment: Comment
+}>()
 
-const emit = defineEmits(['show-full-image']);
+const emit = defineEmits(['show-full-image'])
 
 // ฟังก์ชันสำหรับสร้างสีพาสเทลที่สดใสจากชื่อผู้ใช้
 const getProfileColor = (username: string) => {
-  let hash = 0;
+  let hash = 0
   for (let i = 0; i < username.length; i++) {
-    hash = username.charCodeAt(i) + ((hash << 5) - hash);
+    hash = username.charCodeAt(i) + ((hash << 5) - hash)
   }
-  const hue = hash % 360;
-  const saturation = 70;
-  const lightness = 85;
-  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-};
+  const hue = hash % 360
+  const saturation = 70
+  const lightness = 85
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`
+}
 
 const handleImageClick = () => {
   if (props.comment.image) {
-    emit('show-full-image', props.comment.image);
+    emit('show-full-image', props.comment.image)
   }
-};
+}
 </script>

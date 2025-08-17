@@ -14,30 +14,34 @@
         :style="{ width: `${loadingStore.progress}%` }"
       >
         <!-- Shimmer effect -->
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-shimmer"></div>
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 animate-shimmer"
+        ></div>
         <!-- Pulse effect -->
-        <div class="h-full bg-gradient-to-r from-transparent to-white opacity-30 animate-pulse"></div>
+        <div
+          class="h-full bg-gradient-to-r from-transparent to-white opacity-30 animate-pulse"
+        ></div>
       </div>
     </div>
   </Transition>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useLoadingStore } from '../stores/loading';
+import { onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useLoadingStore } from '../stores/loading'
 
-const router = useRouter();
-const loadingStore = useLoadingStore();
+const router = useRouter()
+const loadingStore = useLoadingStore()
 
 // Handle page reload/refresh
 const handleBeforeUnload = () => {
-  loadingStore.startLoading();
-};
+  loadingStore.startLoading()
+}
 
 const handleLoad = () => {
-  loadingStore.finishLoading();
-};
+  loadingStore.finishLoading()
+}
 
 onMounted(() => {
   // Router navigation events
@@ -45,39 +49,39 @@ onMounted(() => {
     // Start loading for all routes except news detail
     if (from.path === '/' && to.path.includes('/news/')) {
       // Don't show progress bar when navigating from home to news detail
-      return;
+      return
     }
-    loadingStore.startLoading();
-  });
+    loadingStore.startLoading()
+  })
 
   router.afterEach((to, from) => {
     // Add a small delay to ensure the page has rendered
     setTimeout(() => {
       if (from.path === '/' && to.path.includes('/news/')) {
         // Don't finish loading when navigating from home to news detail
-        return;
+        return
       }
-      loadingStore.finishLoading();
-    }, 100);
-  });
+      loadingStore.finishLoading()
+    }, 100)
+  })
 
   // Page reload/refresh events
-  window.addEventListener('beforeunload', handleBeforeUnload);
-  window.addEventListener('load', handleLoad);
+  window.addEventListener('beforeunload', handleBeforeUnload)
+  window.addEventListener('load', handleLoad)
 
   // If page is already loading when component mounts
   if (document.readyState === 'loading') {
-    loadingStore.startLoading();
-    
+    loadingStore.startLoading()
+
     // Listen for DOM content loaded
     document.addEventListener('DOMContentLoaded', () => {
-      loadingStore.finishLoading();
-    });
+      loadingStore.finishLoading()
+    })
   }
-});
+})
 
 onUnmounted(() => {
-  window.removeEventListener('beforeunload', handleBeforeUnload);
-  window.removeEventListener('load', handleLoad);
-});
+  window.removeEventListener('beforeunload', handleBeforeUnload)
+  window.removeEventListener('load', handleLoad)
+})
 </script>

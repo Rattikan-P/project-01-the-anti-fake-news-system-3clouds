@@ -3,7 +3,6 @@ import HomePage from '../views/HomePage.vue'
 import NewsDetail from '../views/NewsDetail.vue'
 import AddNews from '../views/AddNews.vue'
 
-
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -17,10 +16,7 @@ const router = createRouter({
       name: 'news-detail',
       component: NewsDetail,
     },
-    { path: '/add-news', 
-      name: 'addNews', 
-      component: AddNews ,
-    }
+    { path: '/add-news', name: 'addNews', component: AddNews },
   ],
 })
 

@@ -49,26 +49,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue';
-import type { VoteSummary } from '../stores/news';
+import { computed, defineProps } from 'vue'
+import type { VoteSummary } from '../stores/news'
 
 const props = defineProps<{
-  voteSummary: VoteSummary;
-}>();
+  voteSummary: VoteSummary
+}>()
 
-const fakeVotes = computed(() => props.voteSummary.fake || 0);
-const realVotes = computed(() => props.voteSummary.real || 0);
-const totalVotes = computed(() => fakeVotes.value + realVotes.value);
+const fakeVotes = computed(() => props.voteSummary.fake || 0)
+const realVotes = computed(() => props.voteSummary.real || 0)
+const totalVotes = computed(() => fakeVotes.value + realVotes.value)
 
 const realPercentage = computed(() => {
-  const total = totalVotes.value;
-  if (total === 0) return 0;
-  return Math.round((realVotes.value / total) * 100);
-});
+  const total = totalVotes.value
+  if (total === 0) return 0
+  return Math.round((realVotes.value / total) * 100)
+})
 
 const fakePercentage = computed(() => {
-  const total = totalVotes.value;
-  if (total === 0) return 0;
-  return Math.round((fakeVotes.value / total) * 100);
-});
+  const total = totalVotes.value
+  if (total === 0) return 0
+  return Math.round((fakeVotes.value / total) * 100)
+})
 </script>

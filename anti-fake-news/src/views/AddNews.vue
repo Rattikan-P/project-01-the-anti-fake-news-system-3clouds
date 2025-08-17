@@ -26,45 +26,46 @@
       <div class="p-6">
         <!-- Header (matching news detail style) -->
         <h1 class="text-4xl font-extrabold mb-4 text-gray-900">Add New News</h1>
-        
+
         <div class="flex items-center mb-6 space-x-4 text-sm text-gray-600">
           <span class="bg-blue-600 text-white font-bold px-3 py-1 rounded-full uppercase">
             Draft
           </span>
-          <p>Date: <span class="font-semibold">{{ new Date().toLocaleDateString() }}</span></p>
+          <p>
+            Date: <span class="font-semibold">{{ new Date().toLocaleDateString() }}</span>
+          </p>
         </div>
 
         <!-- Form -->
         <form @submit.prevent="handleAddNews" class="space-y-8">
-
           <!-- Reporter -->
           <div class="group">
             <label for="reporter" class="block text-lg font-semibold text-gray-900 mb-3">
               Reporter
             </label>
-            <input 
-              v-model="formData.reporter" 
-              type="text" 
-              id="reporter" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg" 
+            <input
+              v-model="formData.reporter"
+              type="text"
+              id="reporter"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg"
               placeholder="enter reporter name"
               required
-            >
+            />
           </div>
-          
+
           <!-- Topic -->
           <div class="group">
             <label for="topic" class="block text-lg font-semibold text-gray-900 mb-3">
               News Title
             </label>
-            <input 
-              v-model="formData.topic" 
-              type="text" 
-              id="topic" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg" 
+            <input
+              v-model="formData.topic"
+              type="text"
+              id="topic"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg"
               placeholder="enter an interesting news title..."
               required
-            >
+            />
           </div>
 
           <!-- Short Detail -->
@@ -72,11 +73,11 @@
             <label for="shortDetail" class="block text-lg font-semibold text-gray-900 mb-3">
               Short Description
             </label>
-            <textarea 
-              v-model="formData.shortDetail" 
-              id="shortDetail" 
-              rows="4" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg leading-relaxed resize-none" 
+            <textarea
+              v-model="formData.shortDetail"
+              id="shortDetail"
+              rows="4"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg leading-relaxed resize-none"
               placeholder="brief summary..."
               required
             ></textarea>
@@ -87,11 +88,11 @@
             <label for="fullDetail" class="block text-lg font-semibold text-gray-900 mb-3">
               Full News Content
             </label>
-            <textarea 
-              v-model="formData.fullDetail" 
-              id="fullDetail" 
-              rows="8" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg leading-relaxed resize-none" 
+            <textarea
+              v-model="formData.fullDetail"
+              id="fullDetail"
+              rows="8"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg leading-relaxed resize-none"
               placeholder="write the complete news content here..."
               required
             ></textarea>
@@ -102,28 +103,26 @@
             <label for="image" class="block text-lg font-semibold text-gray-900 mb-3">
               Image URL
             </label>
-            <input 
-              v-model="formData.image" 
-              type="url" 
-              id="image" 
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg" 
-              placeholder="https://example.com/image.jpg" 
+            <input
+              v-model="formData.image"
+              type="url"
+              id="image"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-gray-800 text-lg"
+              placeholder="https://example.com/image.jpg"
               required
-            >
+            />
           </div>
 
           <!-- Image Preview (if URL is provided) -->
           <div v-if="formData.image && isValidImageUrl" class="group">
-            <label class="block text-lg font-semibold text-gray-900 mb-3">
-              Image Preview
-            </label>
+            <label class="block text-lg font-semibold text-gray-900 mb-3"> Image Preview </label>
             <img
               :src="formData.image"
               alt="News image preview"
               class="w-full h-auto rounded-lg shadow-md"
               @load="handleImageLoad"
               @error="handleImageError"
-            >
+            />
           </div>
 
           <!-- Submit Button Section -->
@@ -135,20 +134,24 @@
               >
                 Cancel
               </router-link>
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-lg hover:shadow-xl"
               >
                 <span class="flex items-center space-x-2">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    ></path>
                   </svg>
                   <span>Add News</span>
                 </span>
               </button>
             </div>
           </div>
-
         </form>
       </div>
     </div>
@@ -163,16 +166,16 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { useNewsStore } from '../stores/news';
-import { useNotificationStore } from '../stores/notification';
-import ToastNotification from '../components/ToastNotification.vue';
-import type { News } from '../stores/news';
+import { reactive, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useNewsStore } from '../stores/news'
+import { useNotificationStore } from '../stores/notification'
+import ToastNotification from '../components/ToastNotification.vue'
+import type { News } from '../stores/news'
 
-const router = useRouter();
-const newsStore = useNewsStore();
-const notificationStore = useNotificationStore();
+const router = useRouter()
+const newsStore = useNewsStore()
+const notificationStore = useNotificationStore()
 
 const formData = reactive({
   topic: '',
@@ -180,25 +183,25 @@ const formData = reactive({
   fullDetail: '',
   image: '',
   reporter: '',
-});
+})
 
 const isValidImageUrl = computed(() => {
-  if (!formData.image) return false;
+  if (!formData.image) return false
   try {
-    const url = new URL(formData.image);
-    return url.protocol === 'http:' || url.protocol === 'https:';
+    const url = new URL(formData.image)
+    return url.protocol === 'http:' || url.protocol === 'https:'
   } catch {
-    return false;
+    return false
   }
-});
+})
 
 const handleImageLoad = () => {
   // Image loaded successfully
-};
+}
 
 const handleImageError = () => {
-  console.warn('Failed to load preview image');
-};
+  console.warn('Failed to load preview image')
+}
 
 const handleAddNews = () => {
   try {
@@ -208,26 +211,25 @@ const handleAddNews = () => {
       voteSummary: { real: 0, fake: 0 },
       comments: [],
       totalVotes: 0,
-    };
-    
-    newsStore.addUnsavedNews(newNews);
-    
+    }
+
+    newsStore.addUnsavedNews(newNews)
+
     // Show success notification
-    notificationStore.addNotification('News added successfully.', 'success');
-    
+    notificationStore.addNotification('News added successfully.', 'success')
+
     // Reset form
-    Object.keys(formData).forEach(key => {
-      formData[key as keyof typeof formData] = '';
-    });
-    
+    Object.keys(formData).forEach((key) => {
+      formData[key as keyof typeof formData] = ''
+    })
+
     // Navigate to home after a short delay
     setTimeout(() => {
-      router.push('/');
-    }, 700);
-    
+      router.push('/')
+    }, 700)
   } catch (error) {
-    console.error('Error adding news:', error);
-    notificationStore.addNotification('Failed to add news. Please try again.', 'error');
+    console.error('Error adding news:', error)
+    notificationStore.addNotification('Failed to add news. Please try again.', 'error')
   }
-};
+}
 </script>
